@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "./_variables";
+@import "./_override-antd";
+
+.bordered-area {
+  border: 1px solid black;
+  border-radius: 2 * $unit;
+  padding: 4 * $unit;
+  width: 500px;
+}
+
+.sidebar-search {
+  max-width: 300px;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+// .resizable-column {
+//   cursor: col-resize
+
+// }
+.react-resizable {
+  position: relative;
+  background-clip: padding-box;
+}
+.custom-resize-handle {
+  // cursor: col-resize; /* Изменение формы курсора */
+  position: absolute;
+  right: -5px;
+  bottom: 0;
+  z-index: 1;
+  width: 10px;
+  height: 100%;
+  cursor: col-resize;
+}

@@ -1,0 +1,18 @@
+{
+  "item": {
+    "name": "Название диаграммы",
+    "params": {
+      "xyParams": {
+        "x": ["gfh", "absGNKMark"],
+        "y": ["gfh", "absGVKMark"]
+      },
+      "chartVariant": "CHART_SCATTER_DEFAULT",
+      "displaySettings": ["logY"],
+      "currentPlot": "scatter"
+    },
+
+    "uid": "1f18c9f1-f9cf-4651-9591-c1c04862ed42",
+    "pattern": "4c1c4146-3978-43b2-818c-71aabbaea35c",
+    "collection": "37a3619c-d10e-4da1-a0dc-5d8f6f228067"
+  }
+}
