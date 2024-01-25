@@ -1,9 +1,11 @@
-import "react-resizable/css/styles.css";
-import IndexPage from "pages";
+
 import "../scss/index.scss";
 
-const App = () => {
-  return <IndexPage />;
-};
 
-export default App;
+
+
+function MyApp({ Component, pageProps }) {
+  return <Component {...pageProps} />
+}
+
+export default MyApp
