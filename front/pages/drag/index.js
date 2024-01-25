@@ -1,7 +1,11 @@
+import DragLayout from "components/DragLayout";
+
 const dragPage = () => {
   return (
     <>
-      <div>Drag</div>
+      <div>
+        <DragLayout />
+      </div>
     </>
   );
 };
