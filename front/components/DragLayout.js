@@ -62,6 +62,26 @@ const DragLayout = () => {
     console.log("selected", selectedKeys, info);
   };
 
+  const onDragEnter = (info) => {
+    console.log(info);
+    const { event, node } = info;
+    // event.dataTransfer.setData("text/plain", JSON.stringify(node));
+    event.dataTransfer.setData("text", JSON.stringify(node));
+  };
+
+  const onDrop = (event) => {
+    event.preventDefault();
+    // const data = event.dataTransfer.getData("text/plain");
+    const data = event.dataTransfer.getData("text");
+    const draggedNode = JSON.parse(data);
+
+    // Обработка данных из перетаскиваемого элемента, например, установка значения в Input
+    const inputValue = draggedNode.title;
+    // Далее можно использовать значение inputValue по вашему усмотрению
+
+    console.log("Dropped:", inputValue);
+  };
+
   return (
     <div style={{ display: "flex", height: "100vh" }}>
       <Layout>
@@ -95,6 +115,9 @@ const DragLayout = () => {
             defaultSelectedKeys={["0-0-0", "0-0-1"]}
             onSelect={onSelect}
             treeData={treeData}
+            draggable
+            // blockNode
+            onDragEnter={onDragEnter}
           />
         </Sider>
         <Layout>
@@ -124,7 +147,10 @@ const DragLayout = () => {
               borderRadius: borderRadiusLG,
             }}
           >
-            <Input></Input>
+            <Input
+              onDrop={onDrop}
+              onDragOver={(event) => event.preventDefault()}
+            ></Input>
           </Content>
         </Layout>
       </Layout>
