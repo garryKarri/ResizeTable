@@ -11,6 +11,8 @@ const { Header, Sider, Content } = Layout;
 
 const DragLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
+  
+
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -62,24 +64,19 @@ const DragLayout = () => {
     console.log("selected", selectedKeys, info);
   };
 
-  const onDragEnter = (info) => {
+  const onDragStart = (info) => {
+    // onDragEnter
     console.log(info);
     const { event, node } = info;
     // event.dataTransfer.setData("text/plain", JSON.stringify(node));
-    event.dataTransfer.setData("text", JSON.stringify(node));
+    // event.dataTransfer.setData("text", JSON.stringify(node.key));
+    console.log(event.currentTarget);
   };
+  const onDrop = (e) => {
+    console.log(e);
 
-  const onDrop = (event) => {
-    event.preventDefault();
-    // const data = event.dataTransfer.getData("text/plain");
-    const data = event.dataTransfer.getData("text");
-    const draggedNode = JSON.parse(data);
-
-    // Обработка данных из перетаскиваемого элемента, например, установка значения в Input
-    const inputValue = draggedNode.title;
-    // Далее можно использовать значение inputValue по вашему усмотрению
-
-    console.log("Dropped:", inputValue);
+    // const data = e.dataTransfer.getData("text");
+    console.log(e.currentTarget);
   };
 
   return (
@@ -115,9 +112,13 @@ const DragLayout = () => {
             defaultSelectedKeys={["0-0-0", "0-0-1"]}
             onSelect={onSelect}
             treeData={treeData}
-            draggable
+            draggable={{
+              icon: false, // скрываем иконку перетаскивания
+              nodeDraggable: () => true, // возвращаем true для всех узлов, делая их перетаскиваемыми
+            }}
             // blockNode
-            onDragEnter={onDragEnter}
+            // onDragEnter={onDragEnter}
+            onDragStart={onDragStart}
           />
         </Sider>
         <Layout>
