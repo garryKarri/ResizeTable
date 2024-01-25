@@ -11,7 +11,7 @@ const { Header, Sider, Content } = Layout;
 
 const DragLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
-  
+  const [draggedNode, setDraggedNode] = useState(null);
 
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -65,18 +65,32 @@ const DragLayout = () => {
   };
 
   const onDragStart = (info) => {
-    // onDragEnter
-    console.log(info);
-    const { event, node } = info;
-    // event.dataTransfer.setData("text/plain", JSON.stringify(node));
-    // event.dataTransfer.setData("text", JSON.stringify(node.key));
-    console.log(event.currentTarget);
+    const { node, event } = info;
+    setDraggedNode(node.title);
+    console.log(draggedNode);
+    // Устанавливаем данные в объект DataTransfer
+    event.dataTransfer.dropEffect = "copy";
+    // event.dataTransfer.setData("text", `${node.title}`);
+    event.dataTransfer.item.push(`${node.title}`);
+    console.log(event.dataTransfer);
   };
-  const onDrop = (e) => {
-    console.log(e);
 
-    // const data = e.dataTransfer.getData("text");
-    console.log(e.currentTarget);
+  // const onDrop = (e) => {
+  //   console.log(e);
+
+  //   // const data = e.dataTransfer.getData("text");
+  //   console.log(e.currentTarget);
+  // };
+
+  const onDrop = (e) => {
+    e.preventDefault();
+    if (draggedNode) {
+      // const inputElement = e.target;
+      console.log(
+        "Тут должны быть данные из dataTransfer ",
+        e.dataTransfer.getData("text")
+      );
+    }
   };
 
   return (
@@ -151,6 +165,8 @@ const DragLayout = () => {
             <Input
               onDrop={onDrop}
               onDragOver={(event) => event.preventDefault()}
+              // value={draggedNode || ""} // Обработка null
+              draggable={true} // Добавленный атрибут
             ></Input>
           </Content>
         </Layout>
