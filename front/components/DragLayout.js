@@ -9,9 +9,11 @@ import {
 import { Layout, Menu, Button, theme, Tree, Input } from "antd";
 const { Header, Sider, Content } = Layout;
 
+
 const DragLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [draggedNode, setDraggedNode] = useState(null);
+  const [droppedNode, setDroppedNode] = useState(null);
 
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -67,11 +69,11 @@ const DragLayout = () => {
   const onDragStart = (info) => {
     const { node, event } = info;
     setDraggedNode(node.title);
-    console.log(draggedNode);
+    console.log(node);
     // Устанавливаем данные в объект DataTransfer
     event.dataTransfer.dropEffect = "copy";
-    // event.dataTransfer.setData("text", `${node.title}`);
-    event.dataTransfer.item.push(`${node.title}`);
+    event.dataTransfer.setData("text", `${node.title}`);
+
     console.log(event.dataTransfer);
   };
 
@@ -85,7 +87,7 @@ const DragLayout = () => {
   const onDrop = (e) => {
     e.preventDefault();
     if (draggedNode) {
-      // const inputElement = e.target;
+      setDroppedNode(draggedNode);
       console.log(
         "Тут должны быть данные из dataTransfer ",
         e.dataTransfer.getData("text")
@@ -165,7 +167,7 @@ const DragLayout = () => {
             <Input
               onDrop={onDrop}
               onDragOver={(event) => event.preventDefault()}
-              // value={draggedNode || ""} // Обработка null
+              value={droppedNode || ""} // Обработка null
               draggable={true} // Добавленный атрибут
             ></Input>
           </Content>
