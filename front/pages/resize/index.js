@@ -6,37 +6,43 @@ import "react-resizable/css/styles.css";
 const dataSource = [
   {
     key: "1",
-    name: "张三",
-    age: 32,
-    address: "西湖区湖底公园1号",
+    name: "ячейка 1",
+    age: "яйчейка 2",
+    address: "ячейка 3",
   },
   {
     key: "2",
-    name: "李四",
-    age: 42,
-    address: "西湖区湖底公园1号",
+    name: "ячейка 5",
+    age: "ячейка 6",
+    address: "ячейка 7",
   },
 ];
 
 const columns = [
   {
-    title: "姓名",
+    title: "столбец 1",
     dataIndex: "name",
     key: "name",
     width: 110,
-    className: "resizable-column",
+    className: "fixed-resizable-column",
+    align: "center",
+    ellipsis: true,
   },
   {
-    title: "年龄",
+    title: "столбец 2",
     dataIndex: "age",
     key: "age",
     width: 90,
+    align: "center",
+    ellipsis: true,
   },
   {
-    title: "住址",
+    title: "столбец 3",
     dataIndex: "address",
     key: "address",
     width: 220,
+    align: "center",
+    ellipsis: true,
   },
 ];
 
@@ -49,7 +55,14 @@ const ResizableTitle = (props) => {
     <Resizable
       width={width}
       height={0}
-      handle={<span className="custom-resize-handle" />}
+      handle={
+        <span
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+          className="custom-resize-handle"
+        />
+      }
       onResize={onResize}
       // draggableOpts={{ enableUserSelectHack: false }}
     >
@@ -72,6 +85,7 @@ const ResizableTable = ({ dataSource, columns }) => {
         return newColumns;
       });
     };
+  
 
   const components = {
     header: {
@@ -83,7 +97,7 @@ const ResizableTable = ({ dataSource, columns }) => {
   };
 
   return (
-    <div>
+    <div style={{ width: "500px" }}>
       <Table
         bordered
         pagination={false}
@@ -100,6 +114,7 @@ const ResizableTable = ({ dataSource, columns }) => {
           }),
         }))}
         components={components}
+        scroll={{ x: "max-content" }} // Установка горизонтальной прокрутки
       />
     </div>
   );

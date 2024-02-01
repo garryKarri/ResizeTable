@@ -25,10 +25,10 @@ body {
   overflow: hidden;
 }
 
-// .resizable-column {
-//   cursor: col-resize
-
-// }
+.fixed-resizable-column {
+  min-width: 110px;
+  resize: "none";
+}
 .react-resizable {
   position: relative;
   background-clip: padding-box;
