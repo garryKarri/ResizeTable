@@ -26,25 +26,27 @@ const columns = [
     width: 200,
     align: "center",
     ellipsis: true,
+    minWidth: 200, // Минимальная ширина для колонки "столбец 1"
   },
   {
     title: "столбец 2",
     dataIndex: "age",
     key: "age",
-    width: 90,
+    width: 150,
     align: "center",
     ellipsis: true,
+    minWidth: 150, // Минимальная ширина для колонки "столбец 2"
   },
   {
     title: "столбец 3",
     dataIndex: "address",
     key: "address",
-    width: 220,
+    width: 200,
     align: "center",
     ellipsis: true,
+    minWidth: 200, // Минимальная ширина для колонки "столбец 3"
   },
 ];
-
 const ResizableTitle = (props) => {
   const { onResize, width, ...restProps } = props;
   if (!width) {
@@ -71,23 +73,33 @@ const ResizableTitle = (props) => {
   );
 };
 
-
-
 const ResizableTable = ({ dataSource, columns }) => {
   const [tableColumns, setTableColumns] = useState(columns);
 
-  // функция для ресайза всех колонок
+  //минимальная ширина для каждой колонки
   const handleResize =
     (columnIndex) =>
     (e, { size }) => {
       setTableColumns((prevColumns) => {
         const newColumns = [...prevColumns];
-        newColumns[columnIndex].width = size.width;
+        const minWidth = newColumns[columnIndex].minWidth || 0;
+        // Получаем минимальную ширину для данной колонки
+        newColumns[columnIndex].width =
+          size.width < minWidth ? minWidth : size.width;
         return newColumns;
       });
     };
 
-  
+  // функция для ресайза всех колонок
+  // const handleResize =
+  //   (columnIndex) =>
+  //   (e, { size }) => {
+  //     setTableColumns((prevColumns) => {
+  //       const newColumns = [...prevColumns];
+  //       newColumns[columnIndex].width = size.width;
+  //       return newColumns;
+  //     });
+  //   };
 
   const components = {
     header: {
@@ -100,7 +112,6 @@ const ResizableTable = ({ dataSource, columns }) => {
 
   return (
     <div style={{ width: "500px" }}>
-    
       <Table
         bordered
         pagination={false}
