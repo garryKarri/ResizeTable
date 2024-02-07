@@ -39,3 +39,11 @@ body {
   cursor: col-resize;
 }
 
+// стили для того, чтобы не показывался курсор ресайза из библиотеки react_resizable
+// .react-resizable-handle {
+//   background-image: none;
+// }
+
+// .react-resizable-handle-se {
+//   cursor: default;
+// }

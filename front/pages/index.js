@@ -20,6 +20,9 @@ const IndexPage = () => {
           <li>
             <Link href="/drag">Drag&Drop</Link>
           </li>
+          <li>
+            <Link href="/resizeFirstColumn">ResizeFirstColumn</Link>
+          </li>
         </ul>
       </nav>
     </div>
