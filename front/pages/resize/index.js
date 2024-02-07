@@ -32,19 +32,19 @@ const columns = [
     title: "столбец 2",
     dataIndex: "age",
     key: "age",
-    width: 150,
+    width: 200,
     align: "center",
     ellipsis: true,
-    minWidth: 150, // Минимальная ширина для колонки "столбец 2"
+    minWidth: 200, // Минимальная ширина для колонки "столбец 2"
   },
   {
     title: "столбец 3",
     dataIndex: "address",
     key: "address",
-    width: 200,
+    width: 150,
     align: "center",
     ellipsis: true,
-    minWidth: 200, // Минимальная ширина для колонки "столбец 3"
+    minWidth: 150, // Минимальная ширина для колонки "столбец 3"
   },
 ];
 const ResizableTitle = (props) => {
@@ -128,7 +128,8 @@ const ResizableTable = ({ dataSource, columns }) => {
           }),
         }))}
         components={components}
-        scroll={{ x: 300 }}
+        scroll={{ x: 100 }}
+        tableLayout="fixed"
       />
     </div>
   );
